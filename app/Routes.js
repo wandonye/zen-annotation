@@ -5,6 +5,7 @@ import routes from './constants/routes';
 import App from './containers/App';
 import HomePage from './containers/HomePage';
 import DetailPage from './containers/DetailPage';
+import ImageViewPage from './containers/ImageViewPage';
 import PlayPage from './containers/PlayPage';
 
 export default () => (
@@ -12,6 +13,7 @@ export default () => (
     <Switch>
       <Route path={routes.HOME} exact component={HomePage} />
       <Route path={routes.DETAIL} component={DetailPage} />
+      <Route path={routes.IMAGEVIEW} component={ImageViewPage} />
       <Route path={routes.PLAY} component={PlayPage} />
     </Switch>
   </App>

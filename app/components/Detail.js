@@ -1,8 +1,8 @@
 // @flow
 import React, { Component } from 'react';
-import ImageZoom from 'react-medium-image-zoom';
 import styles from './Detail.scss';
 import share from '../share_in_renderer';
+import { setCurrentImage } from '../actions/imageview';
 
 type Props = {
   match: {},
@@ -10,7 +10,7 @@ type Props = {
   history: {}
 };
 
-export default class Home extends Component<Props> {
+export default class Detail extends Component<Props> {
   props: Props;
 
   constructor(props) {
@@ -22,6 +22,13 @@ export default class Home extends Component<Props> {
 
     this.id = id;
     this.album = albums.find(item => item.id === id);
+    this.showImage = this.showImage.bind(this);
+  }
+
+  showImage(path, name, ratio) {
+    const { history } = this.props;
+    share.store.dispatch(setCurrentImage(path, name, ratio));
+    history.push(`/imageview`);
   }
 
   itemsJsx() {
@@ -29,19 +36,11 @@ export default class Home extends Component<Props> {
 
     return images.map(item => (
       <div className={styles.item} key={item.name}>
-        <div className={styles.inner}>
-          <ImageZoom
-            image={{
-              src: item.path,
-              alt: item.name,
-              className: styles.image
-            }}
-            zoomImage={{
-              src: item.path,
-              alt: item.name
-            }}
-          />
-          {/* <img className={styles.image} src={item.path} alt="cover"/> */}
+        <div className={styles.inner} onClick={()=>{
+            const img = document.getElementById(item.name);
+            this.showImage(item.path, item.name, img.width/img.height);
+          }}>
+          <img id={item.name} className={styles.image} src={item.path} alt="cover"/>
         </div>
       </div>
     ));

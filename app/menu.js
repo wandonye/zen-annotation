@@ -198,14 +198,14 @@ export default class MenuBuilder {
           {
             label: 'Github',
             click() {
-              shell.openExternal('https://github.com/senntyou/image-viewer');
+              shell.openExternal('https://github.com/wandonye/zen-annotation');
             }
           },
           {
             label: 'Report issues',
             click() {
               shell.openExternal(
-                'https://github.com/senntyou/image-viewer/issues'
+                'https://github.com/wandonye/zen-annotation'
               );
             }
           },
