@@ -1,31 +1,14 @@
 # Zen-Annotation
 
-[中文文档](./README.md)
-
 an image-labelling tool emphasizes human-computer/human-human collaboration.
 
 ## preview
-
-![intro](./screen/intro.png)
-
-![home](./screen/home.png)
-
-![detail](./screen/detail.png)
-
-![preview](./screen/preview.png)
-
-![play](./screen/play.png)
-
-![play](https://user-images.githubusercontent.com/12265053/44616267-3e0aac80-a87f-11e8-9c35-6451d91afe0a.gif)
-
-![play](https://user-images.githubusercontent.com/12265053/44616256-eff5a900-a87e-11e8-9598-f09f25582172.gif)
 
 ## related
 
 - [electron-react-boilerplate](https://github.com/chentsulin/electron-react-boilerplate)
 - [diaporama](https://github.com/gre/diaporama)
 - [ant-design](https://github.com/ant-design/ant-design)
-- [react-medium-image-zoom](https://github.com/rpearce/react-medium-image-zoom)
 
 ## development
 
