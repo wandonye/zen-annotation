@@ -1,6 +1,8 @@
 export type imageType = {
   +path: string,
-  +name: string
+  +name: string,
+  width: number,
+  height: number
 };
 
 export type albumType = {

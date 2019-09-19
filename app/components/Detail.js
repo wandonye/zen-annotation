@@ -1,5 +1,6 @@
 // @flow
 import React, { Component } from 'react';
+import ReactList from 'react-list';
 import styles from './Detail.scss';
 import share from '../share_in_renderer';
 import { setCurrentImage } from '../actions/imageview';
@@ -25,25 +26,17 @@ export default class Detail extends Component<Props> {
     this.showImage = this.showImage.bind(this);
   }
 
-  showImage(path, name, ratio) {
+  showImage(item) {
     const { history } = this.props;
-    share.store.dispatch(setCurrentImage(path, name, ratio));
+    share.store.dispatch(setCurrentImage(item.path, item.name, item.width/item.height));
     history.push(`/imageview`);
   }
 
-  itemsJsx() {
-    const { images } = this.album;
-
-    return images.map(item => (
-      <div className={styles.item} key={item.name}>
-        <div className={styles.inner} onClick={()=>{
-            const img = document.getElementById(item.name);
-            this.showImage(item.path, item.name, img.width/img.height);
-          }}>
-          <img id={item.name} className={styles.image} src={item.path} alt="cover"/>
-        </div>
-      </div>
-    ));
+  renderItem(index, key) {
+    const item = this.album.images[index];
+    return (<div className={styles.item} key={key} onClick={()=>{this.showImage(item)}}>
+            {item.name}
+            </div>);
   }
 
   back = () => {
@@ -51,6 +44,7 @@ export default class Detail extends Component<Props> {
   };
 
   render() {
+    const { images } = this.album;
     return (
       <div className={styles.container}>
         <div className={styles.topBar}>
@@ -62,7 +56,13 @@ export default class Detail extends Component<Props> {
           />
           <div className={styles.title}>{this.album.name}</div>
         </div>
-        <div className={styles.content}>{this.itemsJsx()}</div>
+        <div className={styles.content}>
+          <ReactList
+            itemRenderer={::this.renderItem}
+            length={images.length}
+            type='uniform' 
+          />
+        </div>
       </div>
     );
   }

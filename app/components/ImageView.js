@@ -48,7 +48,7 @@ export default class ImageView extends Component<Props> {
     const {annotation, annotations, type} = this.state;
     const { imageview } = this.props;
     const w = window.innerWidth;
-    const h = window.innerHeight-40;
+    const h = window.innerHeight-50;
     let image_height = h;
     let image_width = h*imageview.ratio;
     if (w/h<imageview.ratio) {
@@ -67,7 +67,9 @@ export default class ImageView extends Component<Props> {
           />
           <div className={styles.title}>{imageview.name}</div>
         </div>
-          <div style={{position: 'relative', margin: 'auto', width: image_width, height: image_height, cursor: 'crosshair'}} key={imageview.name}>
+          <div style={{position: 'relative', marginTop: '20px', marginRight: 'auto',
+                      marginLeft: 'auto', width: image_width, height: image_height, cursor: 'crosshair'}} 
+                key={imageview.name}>
             <Annotation
               src={imageview.path}
               alt={imageview.name}

@@ -4,6 +4,8 @@ import path from 'path';
 
 import { imageType } from '../reducers/types';
 
+const sizeOf = require('image-size');
+
 const validExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
 
 export default (dirPath: string): Array<imageType> => {
@@ -15,9 +17,13 @@ export default (dirPath: string): Array<imageType> => {
       const ext: string = fileArr.pop().toLowerCase();
       if (validExtensions.indexOf(ext) < 0) return;
 
+      const imagePath = path.join(dirPath, file);
+      const dimensions = sizeOf(imagePath);
       images.push({
         name: fileArr.join('.'),
-        path: path.join(dirPath, file)
+        path: imagePath,
+        width: dimensions.width,
+        height: dimensions.height
       });
     }
   );
