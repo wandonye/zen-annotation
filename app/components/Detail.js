@@ -26,15 +26,15 @@ export default class Detail extends Component<Props> {
     this.showImage = this.showImage.bind(this);
   }
 
-  showImage(item) {
+  showImage(item, index) {
     const { history } = this.props;
-    share.store.dispatch(setCurrentImage(item.path, item.name, item.width/item.height));
-    history.push(`/imageview`);
+    share.store.dispatch(setCurrentImage(item.path, item.name, item.width/item.height, index));
+    history.push(`/imageview/${this.id}/${index}`);
   }
 
   renderItem(index, key) {
     const item = this.album.images[index];
-    return (<div className={styles.item} key={key} onClick={()=>{this.showImage(item)}}>
+    return (<div className={styles.item} key={key} onClick={()=>{this.showImage(item, index)}}>
             {item.name}
             </div>);
   }

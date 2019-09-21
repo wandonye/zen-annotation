@@ -1,10 +1,11 @@
 // @flow
 import React, { Component } from 'react';
-import Annotation from 'react-image-annotation';
+import Annotation from './Annotation';
 import styles from './ImageView.scss';
 
 type Props = {
-  imageview: obj
+  imageview: obj,
+  annotations: array
 };
 
 export default class ImageView extends Component<Props> {
@@ -12,9 +13,18 @@ export default class ImageView extends Component<Props> {
 
   constructor(props) {
     super(props);
-
+ 
     this.state = {
-      annotations: [],
+      annotations: props.annotations.map(annotation => ({
+        geometry: {
+          ...annotation.geometry,
+          type: 'RECTANGLE'
+        },
+        data: {
+          ...annotation.data,
+          id: Math.random()
+        }
+      })),
       annotation: {}
     }
   }
@@ -47,11 +57,13 @@ export default class ImageView extends Component<Props> {
   render() {
     const {annotation, annotations, type} = this.state;
     const { imageview } = this.props;
+    console.log(annotation.geometry);
+    
     const w = window.innerWidth;
     const h = window.innerHeight-50;
     let image_height = h;
     let image_width = h*imageview.ratio;
-    if (w/h<imageview.ratio) {
+    if (w/h < imageview.ratio) {
       image_width = w;
       image_height = w/imageview.ratio;
     }

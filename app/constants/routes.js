@@ -2,5 +2,5 @@ export default {
   HOME: '/',
   DETAIL: '/detail/:id',
   PLAY: '/play/:id',
-  IMAGEVIEW: '/imageview'
+  IMAGEVIEW: '/imageview/:id/:index'
 };

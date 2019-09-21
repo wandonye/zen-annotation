@@ -7,13 +7,15 @@ import {
 export type imageviewStateType = {
   +path: string,
   name: string,
-  ratio: number
+  ratio: number,
+  index: number
 };
 
 const initialState = Map({
   path: '',
   name: '',
-  ratio: 0.5
+  ratio: 0.5,
+  index: 0
 });
 
 export default function imageviewReducer(
@@ -24,7 +26,10 @@ export default function imageviewReducer(
 
   switch (type) {
     case SET_CURRENT_IMAGE: {
-      return state.set('path', payload[0]).set('name', payload[1]).set('ratio', payload[2]);
+      return state.set('path', payload[0])
+                  .set('name', payload[1])
+                  .set('ratio', payload[2])
+                  .set('index', payload[3]);
     }
     default:
       return state;
